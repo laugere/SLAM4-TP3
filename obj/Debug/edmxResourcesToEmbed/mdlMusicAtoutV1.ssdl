@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mdlMusicAtout.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ACCUEILLIR">
+    <Key>
+      <PropertyRef Name="idBati" />
+      <PropertyRef Name="numSalle" />
+      <PropertyRef Name="idType" />
+    </Key>
+    <Property Name="idBati" Type="int" Nullable="false" />
+    <Property Name="numSalle" Type="int" Nullable="false" />
+    <Property Name="idType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BATIMENT">
+    <Key>
+      <PropertyRef Name="idBati" />
+    </Key>
+    <Property Name="idBati" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomBati" Type="char" MaxLength="32" />
+    <Property Name="anConstruction" Type="int" />
+    <Property Name="rueBati" Type="varchar" MaxLength="64" />
+    <Property Name="cpBati" Type="int" />
+    <Property Name="telBati" Type="char" MaxLength="16" />
+    <Property Name="responsable" Type="char" MaxLength="32" />
+    <Property Name="idVille" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SALLE">
+    <Key>
+      <PropertyRef Name="idBati" />
+      <PropertyRef Name="numSalle" />
+    </Key>
+    <Property Name="idBati" Type="int" Nullable="false" />
+    <Property Name="numSalle" Type="int" Nullable="false" />
+    <Property Name="nomSalle" Type="char" MaxLength="32" />
+    <Property Name="capacite" Type="int" />
+    <Property Name="superficie" Type="int" />
+  </EntityType>
+  <EntityType Name="TYPEOEUVRE">
+    <Key>
+      <PropertyRef Name="idType" />
+    </Key>
+    <Property Name="idType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="libelleType" Type="varchar" MaxLength="64" />
+  </EntityType>
+  <EntityType Name="VILLE">
+    <Key>
+      <PropertyRef Name="idVille" />
+    </Key>
+    <Property Name="idVille" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nomVille" Type="char" MaxLength="32" />
+    <Property Name="departement" Type="int" />
+  </EntityType>
+  <Association Name="FK_BATIMENT_VILLE">
+    <End Role="VILLE" Type="Self.VILLE" Multiplicity="1" />
+    <End Role="BATIMENT" Type="Self.BATIMENT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VILLE">
+        <PropertyRef Name="idVille" />
+      </Principal>
+      <Dependent Role="BATIMENT">
+        <PropertyRef Name="idVille" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SALLE">
+    <End Role="SALLE" Type="Self.SALLE" Multiplicity="1" />
+    <End Role="ACCUEILLIR" Type="Self.ACCUEILLIR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SALLE">
+        <PropertyRef Name="idBati" />
+        <PropertyRef Name="numSalle" />
+      </Principal>
+      <Dependent Role="ACCUEILLIR">
+        <PropertyRef Name="idBati" />
+        <PropertyRef Name="numSalle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SALLE_BATIMENT">
+    <End Role="BATIMENT" Type="Self.BATIMENT" Multiplicity="1" />
+    <End Role="SALLE" Type="Self.SALLE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BATIMENT">
+        <PropertyRef Name="idBati" />
+      </Principal>
+      <Dependent Role="SALLE">
+        <PropertyRef Name="idBati" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TYPEOEUVRE">
+    <End Role="TYPEOEUVRE" Type="Self.TYPEOEUVRE" Multiplicity="1" />
+    <End Role="ACCUEILLIR" Type="Self.ACCUEILLIR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TYPEOEUVRE">
+        <PropertyRef Name="idType" />
+      </Principal>
+      <Dependent Role="ACCUEILLIR">
+        <PropertyRef Name="idType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="mdlMusicAtoutStoreContainer">
+    <EntitySet Name="ACCUEILLIR" EntityType="Self.ACCUEILLIR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BATIMENT" EntityType="Self.BATIMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SALLE" EntityType="Self.SALLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TYPEOEUVRE" EntityType="Self.TYPEOEUVRE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VILLE" EntityType="Self.VILLE" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_BATIMENT_VILLE" Association="Self.FK_BATIMENT_VILLE">
+      <End Role="VILLE" EntitySet="VILLE" />
+      <End Role="BATIMENT" EntitySet="BATIMENT" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SALLE" Association="Self.FK_SALLE">
+      <End Role="SALLE" EntitySet="SALLE" />
+      <End Role="ACCUEILLIR" EntitySet="ACCUEILLIR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SALLE_BATIMENT" Association="Self.FK_SALLE_BATIMENT">
+      <End Role="BATIMENT" EntitySet="BATIMENT" />
+      <End Role="SALLE" EntitySet="SALLE" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TYPEOEUVRE" Association="Self.FK_TYPEOEUVRE">
+      <End Role="TYPEOEUVRE" EntitySet="TYPEOEUVRE" />
+      <End Role="ACCUEILLIR" EntitySet="ACCUEILLIR" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

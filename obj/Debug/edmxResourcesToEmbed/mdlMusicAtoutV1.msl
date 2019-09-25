@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="mdlMusicAtoutStoreContainer" CdmEntityContainer="connectMusicAtout">
+    <EntitySetMapping Name="BATIMENT">
+      <EntityTypeMapping TypeName="mdlMusicAtout.BATIMENT">
+        <MappingFragment StoreEntitySet="BATIMENT">
+          <ScalarProperty Name="idBati" ColumnName="idBati" />
+          <ScalarProperty Name="nomBati" ColumnName="nomBati" />
+          <ScalarProperty Name="anConstruction" ColumnName="anConstruction" />
+          <ScalarProperty Name="rueBati" ColumnName="rueBati" />
+          <ScalarProperty Name="cpBati" ColumnName="cpBati" />
+          <ScalarProperty Name="telBati" ColumnName="telBati" />
+          <ScalarProperty Name="responsable" ColumnName="responsable" />
+          <ScalarProperty Name="idVille" ColumnName="idVille" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SALLE">
+      <EntityTypeMapping TypeName="mdlMusicAtout.SALLE">
+        <MappingFragment StoreEntitySet="SALLE">
+          <ScalarProperty Name="idBati" ColumnName="idBati" />
+          <ScalarProperty Name="numSalle" ColumnName="numSalle" />
+          <ScalarProperty Name="nomSalle" ColumnName="nomSalle" />
+          <ScalarProperty Name="capacite" ColumnName="capacite" />
+          <ScalarProperty Name="superficie" ColumnName="superficie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TYPEOEUVRE">
+      <EntityTypeMapping TypeName="mdlMusicAtout.TYPEOEUVRE">
+        <MappingFragment StoreEntitySet="TYPEOEUVRE">
+          <ScalarProperty Name="idType" ColumnName="idType" />
+          <ScalarProperty Name="libelleType" ColumnName="libelleType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VILLE">
+      <EntityTypeMapping TypeName="mdlMusicAtout.VILLE">
+        <MappingFragment StoreEntitySet="VILLE">
+          <ScalarProperty Name="idVille" ColumnName="idVille" />
+          <ScalarProperty Name="nomVille" ColumnName="nomVille" />
+          <ScalarProperty Name="departement" ColumnName="departement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ACCUEILLIR" TypeName="mdlMusicAtout.ACCUEILLIR" StoreEntitySet="ACCUEILLIR">
+      <EndProperty Name="SALLE">
+        <ScalarProperty Name="idBati" ColumnName="idBati" />
+        <ScalarProperty Name="numSalle" ColumnName="numSalle" />
+      </EndProperty>
+      <EndProperty Name="TYPEOEUVRE">
+        <ScalarProperty Name="idType" ColumnName="idType" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
